@@ -173,6 +173,43 @@ border-radius: 50%;
 margin-right: 10px;
 object-fit: cover;
 `
+const Six = styled.div`
+margin-top: 40px;
+margin-bottom: 30px;
+display: flex;
+gap: 10px;
+`
+const Users = styled.img`
+height: 50px;
+width: 50px;
+border-radius: 70%;
+margin-right: 10px;
+object-fit: cover;
+background-color: green;
+`
+const CommentText = styled.div`
+p{
+  margin: 10px 0;
+}
+`
+const Reply = styled.div`
+display: flex;
+align-items: center;
+gap: 20px;
+font-size: 25px;
+
+h6{
+  font-size: 15px;
+}
+`
+const H3 = styled.h3`
+  span{
+    font-weight: 200;
+    font-size: 15px;
+    color: #656464;
+  }
+`
+
 const DetailedVideo:React.FC = () => {
     const [videoData, setVideoData] = useState<any>()
     const [videoComment, setVideoComment] = useState<any>()
@@ -189,7 +226,7 @@ const DetailedVideo:React.FC = () => {
     }
     const RetrieveDetailss = async () =>{
         await  DetailComment(id).then((res)=>{
-            setVideoComment(res?.DetailComment)
+            setVideoComment(res?.comments)
         })
     }
     
@@ -227,7 +264,7 @@ const DetailedVideo:React.FC = () => {
         <p>{videoData?.shortDescription}</p>
       </Three>
       <Four>
-        {/* <p>{videoComment?.comments}</p>  */}
+        <p>{videoComment?.authorName}</p> 
         
         <Logo4><MdOutlineSort></MdOutlineSort> <p>Sort by</p></Logo4>
       </Four>
@@ -235,6 +272,24 @@ const DetailedVideo:React.FC = () => {
       <Dot><BsThreeDots/></Dot>
         <Input placeholder='Add a comment' />
       </Five>
+     
+      <div>
+    {videoComment?.map((comment:any) => (
+      <div key={comment.id}>
+         <Six>
+       
+      
+        <Users src={comment.authorThumbnails[0].url} />
+        <CommentText>
+          <H3><p>{comment.authorName}</p> <span> {comment.publishedTimeText}</span></H3> 
+          <p>{comment.text}</p>
+         <Reply> <AiFillLike /><div>{comment.likes}</div> <AiFillDislike/><div></div> <span><h6>Reply</h6></span></Reply>
+        </CommentText>
+        </Six>
+        </div>
+    ))}
+  </div>
+     
       </Left>
       <Right>
         <Hold>

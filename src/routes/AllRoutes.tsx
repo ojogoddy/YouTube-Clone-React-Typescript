@@ -45,6 +45,10 @@ export const Index = createBrowserRouter([
                 element: <DetailedVideo />
             },
             {
+                path:"detailedVideo",
+                element: <DetailedVideo />
+            },
+            {
                 path:"library",
                 element: <Library />
             },

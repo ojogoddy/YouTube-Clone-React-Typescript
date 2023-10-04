@@ -87,7 +87,6 @@ const Cards:React.FC<iCard> = ({ props}) => {
                     style={{
                         height:"200px",
                         width:"300px",
-                        backgroundColor: "yellow",
                         marginBottom:"10px"
                     }}
                     url={`https://www.youtube.com/watch?v=${props?.video?.videoId}`} />
